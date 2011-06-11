@@ -7,7 +7,7 @@ stylesheet 'partials/_fonts.scss'
 stylesheet 'partials/_media.scss'
 stylesheet 'partials/_page.scss'
 
-file_extn = ENV['TEMPLATE_ENGINE'] || "haml"
+file_extn = ENV['TEMPLATE_ENGINE'] || (defined?(HAML) ? "haml" : "erb")
 file_extn = file_extn.downcase
 if ["erb","haml"].include?(file_extn)
   file_extn

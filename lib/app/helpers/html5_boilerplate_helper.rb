@@ -72,7 +72,7 @@ module Html5BoilerplateHelper
 private
 
   def using_erb?
-    template = ENV['TEMPLATE_ENGINE'] || "haml"
+    template = ENV['TEMPLATE_ENGINE'] || (defined?(HAML) ? "haml" : "erb")
     template.downcase == "erb"
   end
 
