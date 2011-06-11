@@ -21,11 +21,11 @@ module Html5BoilerplateHelper
     <!--[if IE 8 ]>    #{ tag(name, add_class('ie8', attrs), true) } <![endif]-->
     <!--[if IE 9 ]>    #{ tag(name, add_class('ie9', attrs), true) } <![endif]-->
     <!--[if (gte IE 9)|!(IE)]><!-->
-    #{tag(name, attrs)}
+    #{tag(name, attrs, true)}
     <!--<![endif]-->
-      #{capture(&block)}
-    </html>
     HTML
+
+    html_head << "#{capture(&block)}\n</#{name}>" if block_given?
     html_head.html_safe
   end
 
