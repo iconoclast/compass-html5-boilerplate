@@ -8,6 +8,7 @@
   </script>
 <%- else -%>
   <%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/#{ local_jquery("1.6") }" %>
+<% end %>
 
 <!-- fall back to local jQuery if necessary -->
 <script type="text/javascript" charset="utf-8">
@@ -39,3 +40,4 @@
       s.parentNode.insertBefore(g, s);
     })(document, 'script');
   </script>
+<% end %>
