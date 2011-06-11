@@ -7,15 +7,22 @@ stylesheet 'partials/_fonts.scss'
 stylesheet 'partials/_media.scss'
 stylesheet 'partials/_page.scss'
 
+file_extn = ENV['TEMPLATE_ENGINE'] || "haml"
+file_extn = file_extn.downcase
+if ["erb","haml"].include?(file_extn)
+  file_extn
+else
+  file_extn = "haml"
+end
 if Compass.configuration.project_type == :rails
-  file 'application.html.haml', :to => 'app/views/layouts/application.html.haml'
-  file '_flashes.html.haml', :to => 'app/views/layouts/_flashes.html.haml'
-  file '_footer.html.haml', :to => 'app/views/layouts/_footer.html.haml'
-  file '_head.html.haml', :to => 'app/views/layouts/_head.html.haml'
-  file '_header.html.haml', :to => 'app/views/layouts/_header.html.haml'
-  file '_javascripts.html.haml', :to => 'app/views/layouts/_javascripts.html.haml'
-  file '_stylesheets.html.haml', :to => 'app/views/layouts/_stylesheets.html.haml'
-  file 'files/google.yml', :to => 'config/google.yml'
+  file "application.html.#{file_extn}", :to => "app/views/layouts/application.html.#{file_extn}"
+  file "_flashes.html.#{file_extn}", :to => "app/views/layouts/_flashes.html.#{file_extn}"
+  file "_footer.html.#{file_extn}", :to => "app/views/layouts/_footer.html.#{file_extn}"
+  file "_head.html.#{file_extn}", :to => "app/views/layouts/_head.html.#{file_extn}"
+  file "_header.html.#{file_extn}", :to => "app/views/layouts/_header.html.#{file_extn}"
+  file "_javascripts.html.#{file_extn}", :to => "app/views/layouts/_javascripts.html.#{file_extn}"
+  file "_stylesheets.html.#{file_extn}", :to => "app/views/layouts/_stylesheets.html.#{file_extn}"
+  file "files/google.yml", :to => "config/google.yml"
   javascript 'javascripts/jquery-1.6.js', :to => 'jquery.js'
   javascript 'javascripts/jquery-1.6.min.js', :to => 'jquery.min.js'
   javascript 'javascripts/modernizr-1.7.min.js', :to => 'modernizr.min.js'
@@ -23,8 +30,12 @@ if Compass.configuration.project_type == :rails
   javascript 'javascripts/plugins.js', :to => 'plugins.js'
   javascript 'javascripts/rails.js', :to => 'rails.js'
 else
-  html 'index.html.haml'
-  file 'index.html.haml'
+  if file_extn=="erb"
+    html "index.html", :erb => true
+  else
+    html "index.html.haml"
+    file "index.html.haml"
+  end
   javascript 'javascripts/jquery-1.6.min.js', :to => 'jquery.min.js'
   javascript 'javascripts/modernizr-1.7.min.js', :to => 'modernizr.min.js'
   javascript 'javascripts/respond.min.js', :to => 'respond.min.js'
